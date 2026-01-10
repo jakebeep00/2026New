@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>김재근 | Robot SW Engineer Portfolio</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      body { font-family: 'Pretendard', sans-serif; background-color: #020617; }
+      .title-font { font-family: 'Orbitron', sans-serif; }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #020617; }
+      ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+      iframe { pointer-events: none; }
+      @media (min-width: 768px) { iframe { pointer-events: auto; } }
+    </style>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.460.0"
+      }
+    }
+    </script>
+  </head>
+  <body class="bg-slate-950 text-slate-200 overflow-x-hidden">
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+      import React from 'react';
+      import ReactDOM from 'react-dom/client';
+      import { 
+        Mail, Phone, Github, Linkedin, Trophy, Target, Cpu, Eye, Brain, 
+        Settings, ExternalLink, GraduationCap, Award, ChevronRight 
+      } from 'lucide-react';
+
+      const GlassCard = ({ children, className = "" }) => (
+        <div className={`bg-slate-950/85 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 hover:border-indigo-500/40 ${className}`}>
+          {children}
+        </div>
+      );
+
+      const Badge = ({ children, color = "indigo" }) => {
+        const colors = {
+          indigo: "bg-indigo-500/25 text-indigo-300 border-indigo-500/40",
+          green: "bg-emerald-500/25 text-emerald-300 border-emerald-500/40",
+          pink: "bg-pink-500/25 text-pink-300 border-pink-500/40",
+          amber: "bg-amber-500/25 text-amber-300 border-amber-500/40",
+        };
+        return (
+          <span className={`${colors[color]} px-4 py-1.5 rounded-full text-xs font-bold border backdrop-blur-md whitespace-nowrap tracking-wide uppercase`}>
+            {children}
+          </span>
+        );
+      };
+
+      const SectionTitle = ({ children, icon: Icon }) => (
+        <h2 className="text-2xl md:text-4xl font-bold title-font mb-10 flex items-center gap-4 text-white border-b border-white/10 pb-5">
+          <div className="p-3 bg-indigo-500/20 rounded-lg">
+            <Icon className="text-indigo-400" size={32} />
+          </div>
+          {children}
+        </h2>
+      );
+
+      const App = () => {
+        return (
+          <div className="relative min-h-screen">
+            {/* 1. Background Spline 3D Robot */}
+            <div className="fixed inset-0 z-0">
+              <iframe 
+                src='https://my.spline.design/nexbotrobotcharacterconcept-U0ALLyfERyusgo1ehu6q9egn/' 
+                frameBorder='0' 
+                width='100%' 
+                height='100%'
+                title="3D Robot Background"
+                className="opacity-60"
+              />
+            </div>
+
+            {/* 2. Readability Scrim */}
+            <div className="fixed inset-0 z-[1] pointer-events-none bg-gradient-to-b from-slate-950/30 via-slate-950/70 to-slate-950" />
+
+            {/* 3. Main Content Overlay */}
+            <div className="relative z-10 container mx-auto px-6 py-16 md:py-32 max-w-5xl space-y-32">
+              
+              <header className="text-center md:text-left space-y-8 pt-12 md:pt-24">
+                <div className="inline-block px-5 py-2 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 font-bold text-sm mb-4 animate-pulse tracking-widest">
+                  ROBOT SOFTWARE ENGINEER
+                </div>
+                <h1 className="text-6xl md:text-8xl font-black title-font tracking-tighter text-white">
+                  김재근 <span className="text-indigo-500 drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]">Jaegeun Kim</span>
+                </h1>
+                <p className="text-2xl md:text-3xl text-slate-300 font-light max-w-3xl leading-relaxed">
+                  Building the <span className="text-white font-medium">intelligence</span> that moves the machines of tomorrow.
+                </p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+                  <a href="mailto:jaegeunkim.work@gmail.com" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-500/10 transition-all">
+                    <Mail size={20} className="text-indigo-400" />
+                    <span>jaegeunkim.work@gmail.com</span>
+                  </a>
+                  <div className="flex gap-4 w-full md:w-auto">
+                    <a href="https://github.com/jakebeep00" target="_blank" className="flex-1 md:flex-none flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-lg shadow-indigo-500/20">
+                      <Github size={20} />
+                      <span>GitHub</span>
+                    </a>
+                  </div>
+                </div>
+              </header>
+
+              <section id="summary">
+                <GlassCard>
+                  <SectionTitle icon={Target}>PROFESSIONAL SUMMARY</SectionTitle>
+                  <div className="space-y-6 text-xl md:text-2xl leading-relaxed text-slate-200">
+                    <p><span className="text-indigo-400 font-bold">로봇공학 전공 기반의 SW 엔지니어</span>로, 자율주행 및 로봇 비전 시스템 개발 경험을 보유하고 있습니다.</p>
+                    <p className="text-slate-300">SLAM, 컴퓨터 비전, 딥러닝 객체 인식 등 로봇 SW 핵심 기술을 실전에 적용한 경험이 있으며, 대회 3회 수상 및 Valeo 인턴십을 통해 실무 역량을 검증받았습니다.</p>
+                  </div>
+                </GlassCard>
+              </section>
+
+              <section id="achievements">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {[
+                    { label: "대회 수상", val: "3", sub: "Events" },
+                    { label: "드리프트 개선", val: "81%", sub: "Improvement" },
+                    { label: "맵핑 정확도", val: "95%", sub: "Accuracy" },
+                    { label: "완성 프로젝트", val: "5", sub: "Built" },
+                  ].map((stat, idx) => (
+                    <GlassCard key={idx} className="flex flex-col items-center justify-center text-center hover:scale-105 border-indigo-500/10 bg-indigo-500/5">
+                      <span className="text-5xl md:text-6xl font-black title-font text-white mb-2">{stat.val}</span>
+                      <span className="text-indigo-400 font-black text-sm uppercase tracking-widest">{stat.label}</span>
+                    </GlassCard>
+                  ))}
+                </div>
+              </section>
+
+              <section id="competencies">
+                <SectionTitle icon={Cpu}>CORE COMPETENCIES</SectionTitle>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {[
+                    { title: "로봇 제어 시스템", icon: Settings, skills: ["ROS 2 Humble", "SLAM", "Navigation2", "Sensor Fusion"] },
+                    { title: "컴퓨터 비전", icon: Eye, skills: ["OpenCV", "Object Tracking", "Real-time Processing"] },
+                    { title: "딥러닝 & AI", icon: Brain, skills: ["PyTorch", "Backpropagation", "Gradient Descent"] },
+                    { title: "임베디드 시스템", icon: Cpu, skills: ["Raspberry Pi 3/4", "Ubuntu Linux", "GPIO Control"] }
+                  ].map((comp, idx) => (
+                    <GlassCard key={idx}>
+                      <div className="flex items-center gap-5 mb-8">
+                        <div className="p-4 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                          <comp.icon size={28} />
+                        </div>
+                        <h3 className="text-2xl font-bold text-white">{comp.title}</h3>
+                      </div>
+                      <ul className="space-y-4">
+                        {comp.skills.map((skill, sIdx) => (
+                          <li key={sIdx} className="flex items-center gap-4 text-slate-300 text-lg group">
+                            <ChevronRight size={18} className="text-indigo-500 group-hover:translate-x-1 transition-transform" />
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                    </GlassCard>
+                  ))}
+                </div>
+              </section>
+
+              <section id="projects" className="space-y-16">
+                <SectionTitle icon={Trophy}>FEATURED PROJECTS</SectionTitle>
+                <GlassCard className="space-y-10">
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap gap-3 mb-2">
+                      <Badge color="amber">🏆 국제대회 우수상</Badge>
+                      <Badge color="indigo">SLAM Part Leader</Badge>
+                    </div>
+                    <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">LiDAR 기반 SLAM 자율주행</h3>
+                    <p className="text-indigo-400 font-bold text-xl italic">TurtleBot3 + ROS 2 Humble + Cartographer</p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <img src="https://github.com/user-attachments/assets/bb68dc7b-cafc-431e-a7d9-c8c5820aa20f" className="rounded-xl border border-white/10 opacity-80 hover:opacity-100 transition-all" />
+                    <img src="https://github.com/user-attachments/assets/079d8f71-c411-4ed2-b8cd-b205da78874d" className="rounded-xl border border-white/10 opacity-80 hover:opacity-100 transition-all" />
+                  </div>
+                </GlassCard>
+              </section>
+
+              <footer className="text-center pb-32 space-y-10 border-t border-white/10 pt-20">
+                <h2 className="title-font text-3xl font-black text-white tracking-[0.2em]">DRIVING INNOVATION</h2>
+                <div className="flex justify-center gap-10">
+                  <a href="https://github.com/jakebeep00" target="_blank" className="text-slate-500 hover:text-indigo-400 transition-all"><Github size={36} /></a>
+                  <a href="mailto:jaegeunkim.work@gmail.com" className="text-slate-500 hover:text-indigo-400 transition-all"><Mail size={36} /></a>
+                </div>
+                <p className="text-slate-600 text-sm font-bold uppercase tracking-widest">© 2025 Jaegeun Kim.</p>
+              </footer>
+            </div>
+            
+            <div className="fixed bottom-10 right-10 z-50">
+              <a href="mailto:jaegeunkim.work@gmail.com" className="flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-5 rounded-full shadow-2xl transition-all font-black text-lg">
+                <Mail size={24} />
+                <span>CONTACT ME</span>
+              </a>
+            </div>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
