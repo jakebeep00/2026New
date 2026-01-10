@@ -22,6 +22,9 @@
       ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
       iframe { pointer-events: none; }
       @media (min-width: 768px) { iframe { pointer-events: auto; } }
+      .drop-shadow-glow { filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.6)); }
+      .spec-table-row { border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+      .spec-table-row:last-child { border-bottom: none; }
     </style>
 
     <script type="importmap">
@@ -42,11 +45,11 @@
       import ReactDOM from 'react-dom/client';
       import { 
         Mail, Phone, Github, Linkedin, Trophy, Target, Cpu, Eye, Brain, 
-        Settings, ExternalLink, GraduationCap, Award, ChevronRight 
+        Settings, ExternalLink, GraduationCap, Award, ChevronRight, Zap, CheckCircle, Info, Layers
       } from 'lucide-react';
 
       const GlassCard = ({ children, className = "" }) => (
-        <div className={`bg-slate-950/85 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 hover:border-indigo-500/40 ${className}`}>
+        <div className={`bg-slate-950/90 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.7)] transition-all duration-500 hover:border-indigo-500/40 ${className}`}>
           {children}
         </div>
       );
@@ -57,9 +60,10 @@
           green: "bg-emerald-500/25 text-emerald-300 border-emerald-500/40",
           pink: "bg-pink-500/25 text-pink-300 border-pink-500/40",
           amber: "bg-amber-500/25 text-amber-300 border-amber-500/40",
+          gold: "bg-yellow-500/20 text-yellow-400 border-yellow-500/50 shadow-[0_0_15px_rgba(234,179,8,0.2)]",
         };
         return (
-          <span className={`${colors[color]} px-4 py-1.5 rounded-full text-xs font-bold border backdrop-blur-md whitespace-nowrap tracking-wide uppercase`}>
+          <span className={`${colors[color] || colors.indigo} px-4 py-1.5 rounded-full text-xs font-bold border backdrop-blur-md whitespace-nowrap tracking-wide uppercase`}>
             {children}
           </span>
         );
@@ -67,7 +71,7 @@
 
       const SectionTitle = ({ children, icon: Icon }) => (
         <h2 className="text-2xl md:text-4xl font-bold title-font mb-10 flex items-center gap-4 text-white border-b border-white/10 pb-5">
-          <div className="p-3 bg-indigo-500/20 rounded-lg">
+          <div className="p-3 bg-indigo-500/20 rounded-lg shadow-inner">
             <Icon className="text-indigo-400" size={32} />
           </div>
           {children}
@@ -77,89 +81,67 @@
       const App = () => {
         return (
           <div className="relative min-h-screen">
-            {/* 1. Background Spline 3D Robot */}
+            {/* Background 3D */}
             <div className="fixed inset-0 z-0">
-              <iframe 
-                src='https://my.spline.design/nexbotrobotcharacterconcept-U0ALLyfERyusgo1ehu6q9egn/' 
-                frameBorder='0' 
-                width='100%' 
-                height='100%'
-                title="3D Robot Background"
-                className="opacity-60"
-              />
+              <iframe src='https://my.spline.design/nexbotrobotcharacterconcept-U0ALLyfERyusgo1ehu6q9egn/' frameBorder='0' width='100%' height='100%' className="opacity-40" />
             </div>
+            <div className="fixed inset-0 z-[1] pointer-events-none bg-gradient-to-b from-slate-950/40 via-slate-950/80 to-slate-950" />
 
-            {/* 2. Readability Scrim */}
-            <div className="fixed inset-0 z-[1] pointer-events-none bg-gradient-to-b from-slate-950/30 via-slate-950/70 to-slate-950" />
-
-            {/* 3. Main Content Overlay */}
             <div className="relative z-10 container mx-auto px-6 py-16 md:py-32 max-w-5xl space-y-32">
               
+              {/* Header */}
               <header className="text-center md:text-left space-y-8 pt-12 md:pt-24">
-                <div className="inline-block px-5 py-2 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 font-bold text-sm mb-4 animate-pulse tracking-widest">
-                  ROBOT SOFTWARE ENGINEER
-                </div>
-                <h1 className="text-6xl md:text-8xl font-black title-font tracking-tighter text-white">
-                  김재근 <span className="text-indigo-500 drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]">Jaegeun Kim</span>
-                </h1>
-                <p className="text-2xl md:text-3xl text-slate-300 font-light max-w-3xl leading-relaxed">
-                  Building the <span className="text-white font-medium">intelligence</span> that moves the machines of tomorrow.
-                </p>
-                <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
-                  <a href="mailto:jaegeunkim.work@gmail.com" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-500/10 transition-all">
-                    <Mail size={20} className="text-indigo-400" />
-                    <span>jaegeunkim.work@gmail.com</span>
-                  </a>
-                  <div className="flex gap-4 w-full md:w-auto">
-                    <a href="https://github.com/jakebeep00" target="_blank" className="flex-1 md:flex-none flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-lg shadow-indigo-500/20">
-                      <Github size={20} />
-                      <span>GitHub</span>
-                    </a>
-                  </div>
+                <div className="inline-block px-5 py-2 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 font-bold text-sm mb-4 animate-pulse tracking-widest">ROBOT SOFTWARE ENGINEER</div>
+                <h1 className="text-6xl md:text-8xl font-black title-font tracking-tighter text-white">김재근 <span className="text-indigo-500 drop-shadow-glow">Jaegeun Kim</span></h1>
+                <p className="text-2xl md:text-3xl text-slate-300 font-light max-w-3xl leading-relaxed">Building the <span className="text-white font-medium">intelligence</span> that moves the machines of tomorrow.</p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                  <a href="mailto:jaegeunkim.work@gmail.com" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-500/10 transition-all"><Mail size={20} className="text-indigo-400" /><span>jaegeunkim.work@gmail.com</span></a>
+                  <a href="https://github.com/jakebeep00" target="_blank" className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-[0_10px_30px_rgba(79,70,229,0.4)]"><Github size={20} /><span>GitHub</span></a>
                 </div>
               </header>
 
+              {/* Summary */}
               <section id="summary">
                 <GlassCard>
                   <SectionTitle icon={Target}>PROFESSIONAL SUMMARY</SectionTitle>
                   <div className="space-y-6 text-xl md:text-2xl leading-relaxed text-slate-200">
-                    <p><span className="text-indigo-400 font-bold">로봇공학 전공 기반의 SW 엔지니어</span>로, 자율주행 및 로봇 비전 시스템 개발 경험을 보유하고 있습니다.</p>
-                    <p className="text-slate-300">SLAM, 컴퓨터 비전, 딥러닝 객체 인식 등 로봇 SW 핵심 기술을 실전에 적용한 경험이 있으며, 대회 3회 수상 및 Valeo 인턴십을 통해 실무 역량을 검증받았습니다.</p>
+                    <p><span className="text-indigo-400 font-black">로봇공학 전공 기반의 SW 엔지니어</span>로, 자율주행 및 로봇 비전 시스템 개발 경험을 보유하고 있습니다.</p>
+                    <p className="text-slate-300"><strong>SLAM, 컴퓨터 비전, 딥러닝 객체 인식</strong> 등 로봇 SW 핵심 기술을 실전에 적용한 경험이 있으며, 대회 3회 수상(총장상 포함) 및 Valeo 인턴십을 통해 실무 역량을 검증받았습니다.</p>
                   </div>
                 </GlassCard>
               </section>
 
+              {/* Achievements Stats */}
               <section id="achievements">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {[
-                    { label: "대회 수상", val: "3", sub: "Events" },
-                    { label: "드리프트 개선", val: "81%", sub: "Improvement" },
-                    { label: "맵핑 정확도", val: "95%", sub: "Accuracy" },
-                    { label: "완성 프로젝트", val: "5", sub: "Built" },
+                    { label: "대회 수상", val: "3" },
+                    { label: "드리프트 개선", val: "81%" },
+                    { label: "인식 정확도", val: "98%" },
+                    { label: "완성 프로젝트", val: "5" },
                   ].map((stat, idx) => (
-                    <GlassCard key={idx} className="flex flex-col items-center justify-center text-center hover:scale-105 border-indigo-500/10 bg-indigo-500/5">
-                      <span className="text-5xl md:text-6xl font-black title-font text-white mb-2">{stat.val}</span>
+                    <GlassCard key={idx} className="flex flex-col items-center justify-center text-center hover:scale-105 bg-indigo-500/5">
+                      <span className="text-5xl md:text-6xl font-black title-font text-white mb-2 drop-shadow-glow">{stat.val}</span>
                       <span className="text-indigo-400 font-black text-sm uppercase tracking-widest">{stat.label}</span>
                     </GlassCard>
                   ))}
                 </div>
               </section>
 
+              {/* Competencies */}
               <section id="competencies">
                 <SectionTitle icon={Cpu}>CORE COMPETENCIES</SectionTitle>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {[
-                    { title: "로봇 제어 시스템", icon: Settings, skills: ["ROS 2 Humble", "SLAM", "Navigation2", "Sensor Fusion"] },
-                    { title: "컴퓨터 비전", icon: Eye, skills: ["OpenCV", "Object Tracking", "Real-time Processing"] },
-                    { title: "딥러닝 & AI", icon: Brain, skills: ["PyTorch", "Backpropagation", "Gradient Descent"] },
-                    { title: "임베디드 시스템", icon: Cpu, skills: ["Raspberry Pi 3/4", "Ubuntu Linux", "GPIO Control"] }
+                    { title: "로봇 제어 시스템", icon: Settings, skills: ["ROS 2 Humble", "SLAM (Cartographer)", "Navigation2 Stack", "Sensor Fusion"] },
+                    { title: "컴퓨터 비전", icon: Eye, skills: ["OpenCV (RGB→HSV)", "Object Tracking", "Real-time Video Processing", "Point Cloud"] },
+                    { title: "딥러닝 & AI", icon: Brain, skills: ["PyTorch (Backward/GD)", "Linear Regression", "Loss Function Design"] },
+                    { title: "임베디드 시스템", icon: Cpu, skills: ["Raspberry Pi 3/4", "Ubuntu Linux", "GPIO Interface Control"] }
                   ].map((comp, idx) => (
                     <GlassCard key={idx}>
                       <div className="flex items-center gap-5 mb-8">
-                        <div className="p-4 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                          <comp.icon size={28} />
-                        </div>
-                        <h3 className="text-2xl font-bold text-white">{comp.title}</h3>
+                        <div className="p-4 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"><comp.icon size={28} /></div>
+                        <h3 className="text-2xl font-bold text-white tracking-tight">{comp.title}</h3>
                       </div>
                       <ul className="space-y-4">
                         {comp.skills.map((skill, sIdx) => (
@@ -174,38 +156,211 @@
                 </div>
               </section>
 
+              {/* Projects */}
               <section id="projects" className="space-y-16">
                 <SectionTitle icon={Trophy}>FEATURED PROJECTS</SectionTitle>
-                <GlassCard className="space-y-10">
-                  <div className="space-y-4">
+                
+                {/* 1. SLAM Project - Deep Dive Version */}
+                <GlassCard className="space-y-12">
+                  <div className="space-y-6">
                     <div className="flex flex-wrap gap-3 mb-2">
-                      <Badge color="amber">🏆 국제대회 우수상</Badge>
+                      <Badge color="amber">🏆 우수상</Badge>
                       <Badge color="indigo">SLAM Part Leader</Badge>
                     </div>
-                    <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">LiDAR 기반 SLAM 자율주행</h3>
-                    <p className="text-indigo-400 font-bold text-xl italic">TurtleBot3 + ROS 2 Humble + Cartographer</p>
+                    <h3 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight">LiDAR 기반 SLAM 자율주행 시스템 구축</h3>
+                    <div className="flex flex-col md:flex-row md:items-center gap-4 text-indigo-400 font-bold text-xl italic">
+                      <span>TurtleBot3 + ROS 2 Humble + Cartographer + Navigation2</span>
+                      <span className="hidden md:inline text-slate-700">|</span>
+                      <span className="text-slate-500 text-lg">2024.04 - 2024.05</span>
+                    </div>
                   </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <img src="https://github.com/user-attachments/assets/bb68dc7b-cafc-431e-a7d9-c8c5820aa20f" className="rounded-xl border border-white/10 opacity-80 hover:opacity-100 transition-all" />
-                    <img src="https://github.com/user-attachments/assets/079d8f71-c411-4ed2-b8cd-b205da78874d" className="rounded-xl border border-white/10 opacity-80 hover:opacity-100 transition-all" />
+                    <div className="space-y-3">
+                      <img src="https://github.com/user-attachments/assets/bb68dc7b-cafc-431e-a7d9-c8c5820aa20f" className="rounded-2xl border border-white/10 w-full hover:scale-[1.02] transition-transform" />
+                      <p className="text-center text-sm text-slate-500 font-bold">실내 미로형 경진대회 코스</p>
+                    </div>
+                    <div className="space-y-3">
+                      <img src="https://github.com/user-attachments/assets/079d8f71-c411-4ed2-b8cd-b205da78874d" className="rounded-2xl border border-white/10 w-full hover:scale-[1.02] transition-transform" />
+                      <p className="text-center text-sm text-slate-500 font-bold">SLAM 맵핑 개선 과정 (Original → Goal)</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div className="space-y-8">
+                      {/* Mission & Context */}
+                      <div className="p-8 bg-indigo-500/5 rounded-2xl border border-indigo-500/20">
+                        <h4 className="text-indigo-400 font-bold text-xl mb-4 flex items-center gap-2">🎯 대회 미션 및 환경</h4>
+                        <div className="space-y-4 text-slate-300 leading-relaxed">
+                          <p><strong>미션:</strong> 사전 지도 없이 환경을 인식/지도화한 후 목표 지점까지 <strong>완전 자율주행</strong></p>
+                          <p><strong>환경 특성:</strong> 최소 폭 60cm의 좁은 통로, 반복적 미로 구조, 동적 장애물 혼재</p>
+                        </div>
+                      </div>
+
+                      {/* My Role */}
+                      <div className="p-8 bg-amber-500/5 rounded-2xl border border-amber-500/20">
+                        <h4 className="text-amber-400 font-bold text-xl mb-4 flex items-center gap-2">👨‍💻 본인 담당: SLAM 파트 리더</h4>
+                        <p className="text-slate-300 leading-relaxed">인지(Perception) 시스템 핵심 전담. LiDAR 데이터를 기반으로 <strong>실시간 위치 추정(Localization)</strong>과 <strong>고정밀 지도 생성(Mapping)</strong>을 주도하며 주행 안정성 확보.</p>
+                      </div>
+
+                      {/* Hardware Specs */}
+                      <div className="p-8 bg-white/5 rounded-2xl border border-white/10">
+                        <h4 className="text-white font-bold text-xl mb-6 flex items-center gap-2"><Settings size={20} className="text-slate-400" /> 하드웨어 사양</h4>
+                        <div className="space-y-3 font-mono text-sm">
+                          {[
+                            { k: "LiDAR", v: "LDS-01 (360°, 1.8kHz)" },
+                            { k: "Computing", v: "Raspberry Pi 3 Model B" },
+                            { k: "Actuator", v: "Dynamixel XL430-W250-T" },
+                            { k: "IMU", v: "9축 Gyro/Accel/Mag" }
+                          ].map((item, i) => (
+                            <div key={i} className="flex justify-between py-2 border-b border-white/5">
+                              <span className="text-slate-500">{item.k}</span>
+                              <span className="text-slate-300 text-right">{item.v}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-8">
+                      {/* Architecture */}
+                      <div className="p-8 bg-slate-900 rounded-2xl border border-white/10 shadow-inner overflow-x-auto">
+                        <h4 className="text-white font-bold text-xl mb-6 flex items-center gap-2"><Layers size={20} className="text-indigo-400" /> System Architecture</h4>
+                        <div className="font-mono text-xs leading-loose text-indigo-300/80">
+                          <div className="p-2 border border-indigo-500/30 rounded bg-indigo-500/10 mb-2">LiDAR Sensor → /scan (LaserScan)</div>
+                          <div className="text-center py-1">↓</div>
+                          <div className="p-2 border-2 border-indigo-500 rounded bg-indigo-500/20 text-white font-bold shadow-[0_0_15px_rgba(79,70,229,0.4)]">Cartographer (Local SLAM & Loop Closure)</div>
+                          <div className="text-center py-1">↓</div>
+                          <div className="p-2 border border-white/10 rounded bg-white/5">Global Planner (NavFn Dijkstra) → Global Path</div>
+                          <div className="text-center py-1">↓</div>
+                          <div className="p-2 border border-white/10 rounded bg-white/5">Local Planner (DWB) → /cmd_vel</div>
+                          <div className="text-center py-1">↓</div>
+                          <div className="p-2 border border-emerald-500/30 rounded bg-emerald-500/10 text-emerald-400 font-bold">Motion Control (Dynamixel)</div>
+                        </div>
+                      </div>
+
+                      {/* SLAM Details & Parameters */}
+                      <div className="p-8 bg-indigo-600/5 rounded-2xl border border-indigo-500/10">
+                        <h4 className="text-white font-bold text-xl mb-6">🔬 Cartographer 핵심 튜닝</h4>
+                        <div className="space-y-4 text-sm font-mono">
+                          <div className="flex flex-col">
+                            <span className="text-indigo-400">odometry_sampling_ratio: 0.5</span>
+                            <span className="text-slate-500">오도메트리 의존도를 낮춰 회전 시 드리프트 방지</span>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-indigo-400">optimize_every_n_nodes: 90</span>
+                            <span className="text-slate-500">Pose Graph 최적화 주기로 루프 클로저 정밀도 향상</span>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-indigo-400">use_online_correlative_scan_matching: true</span>
+                            <span className="text-slate-500">실시간 스캔 매칭으로 초기 위치 정확도 확보</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Troubleshooting */}
+                  <div className="space-y-8">
+                    <h4 className="text-white font-black text-2xl flex items-center gap-3">⚠️ 기술적 난제 및 해결 과정</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="p-6 bg-red-500/5 border border-red-500/20 rounded-2xl space-y-4">
+                        <span className="text-red-400 font-bold">1. Wall Bending (맵 왜곡)</span>
+                        <p className="text-slate-400 text-sm leading-relaxed">급회전 시 스캔 시간차로 벽면이 휘는 현상. 회전 각속도 제한(0.3rad/s) 및 오도메트리 가중치 튜닝으로 <strong>직선성 95% 확보</strong>.</p>
+                      </div>
+                      <div className="p-6 bg-amber-500/5 border border-amber-500/20 rounded-2xl space-y-4">
+                        <span className="text-amber-400 font-bold">2. Localization Drift</span>
+                        <p className="text-slate-400 text-sm leading-relaxed">반복 구조에서 위치 혼동 발생. 출발점 복귀를 통한 <strong>Loop Closure 강제 유도</strong> 전략으로 드리프트 81% 감소.</p>
+                      </div>
+                      <div className="p-6 bg-indigo-500/5 border border-indigo-500/20 rounded-2xl space-y-4">
+                        <span className="text-indigo-400 font-bold">3. 좁은 통로 충돌 위험</span>
+                        <p className="text-slate-400 text-sm leading-relaxed">60cm 폭 통로 통과 실패. 로봇 Footprint 재설정 및 인플레이션 반경 최적화로 <strong>통과 성공률 100%</strong> 달성.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Achievements and Insights */}
+                  <div className="p-8 bg-emerald-500/5 rounded-2xl border border-emerald-500/20">
+                    <h4 className="text-emerald-400 font-bold text-xl mb-4">💡 프로젝트 성과 및 인사이트</h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-300">
+                      <li className="flex gap-2"><span>•</span> <span>SLAM 품질이 전체 자율주행 성능을 결정하는 연쇄 구조 체득</span></li>
+                      <li className="flex gap-2"><span>•</span> <span>환경 분석 기반의 전략적 맵핑이 알고리즘 성능을 극대화함을 증명</span></li>
+                      <li className="flex gap-2"><span>•</span> <span>시스템 통합 단계에서의 디버깅 및 파라미터 최적화 역량 습득</span></li>
+                      <li className="flex gap-2"><span>•</span> <span><strong>대회 완주 성공 및 우수상 수상</strong></span></li>
+                    </ul>
+                  </div>
+                </GlassCard>
+
+                {/* 2. Computer Vision Project (Previous Turn) */}
+                <GlassCard className="space-y-10 border-indigo-500/20">
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap gap-3 mb-2">
+                      <Badge color="gold">🏆 총장상 (1위)</Badge>
+                      <Badge color="indigo">Computer Vision Leader</Badge>
+                    </div>
+                    <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">컴퓨터 비전 기반 색상 인식 감속 제어 시스템</h3>
+                    <p className="text-indigo-400 font-bold text-xl italic">OpenCV + HSV Filtering + ROS + Raspberry Pi</p>
+                    <p className="text-slate-500 font-bold">2024.02.18 - 2024.02.19</p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="p-6 bg-indigo-500/5 rounded-2xl border border-indigo-500/10">
+                      <h4 className="text-white font-bold text-xl mb-4 flex items-center gap-2"><Zap size={20} className="text-indigo-400" /> 핵심 업무 및 성과</h4>
+                      <ul className="space-y-3 text-slate-300">
+                        <li className="flex gap-2"><CheckCircle size={18} className="text-indigo-500 shrink-0 mt-1" /><span><strong>인식률 98% 이상 달성</strong>: 조명 조건 대응 HSV 필터링 최적화</span></li>
+                        <li className="flex gap-2"><CheckCircle size={18} className="text-indigo-500 shrink-0 mt-1" /><span><strong>초저지연 파이프라인</strong>: 센서-제어 지연 평균 0.15초 이내 최적화</span></li>
+                      </ul>
+                    </div>
+                    <div className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 flex flex-col justify-center">
+                      <h4 className="text-white font-bold text-xl mb-4">🔧 현장 문제 해결</h4>
+                      <div className="space-y-4">
+                        <div className="bg-amber-500/10 p-4 rounded-xl border border-amber-500/20 text-xs">
+                          <p className="text-amber-400 font-bold mb-1">Issue: 그림자 구간 미인식</p>
+                          <p className="text-slate-400">HSV V(명도) 채널 하한값 동적 조정을 통해 저조도 인식률 개선</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </GlassCard>
               </section>
 
+              {/* Work Experience */}
+              <section id="experience">
+                <SectionTitle icon={Award}>WORK EXPERIENCE</SectionTitle>
+                <GlassCard className="border-l-8 border-l-indigo-600">
+                  <div className="flex flex-col md:flex-row justify-between mb-8">
+                    <div>
+                      <h3 className="text-2xl font-black text-white mb-1">Launching Project Manager Intern</h3>
+                      <p className="text-indigo-400 text-xl font-bold italic">Valeo Mobility Korea</p>
+                    </div>
+                    <span className="text-slate-500 font-black">2024.08 - 2024.12</span>
+                  </div>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
+                    {["문서 자동화 도구 개발 (분석 시간 66% 절감)", "DCR 샘플 및 AOI 생산 품질 관리", "재도장 일정 통합 관리 및 팀 효율성 향상", "주간 생산 결함 분석 및 주간 요약 보고서 작성"].map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-4 text-slate-200 text-lg group">
+                        <div className="mt-2 min-w-[8px] h-[8px] rounded-full bg-indigo-500 group-hover:scale-125 transition-transform" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </GlassCard>
+              </section>
+
+              {/* Footer */}
               <footer className="text-center pb-32 space-y-10 border-t border-white/10 pt-20">
-                <h2 className="title-font text-3xl font-black text-white tracking-[0.2em]">DRIVING INNOVATION</h2>
-                <div className="flex justify-center gap-10">
-                  <a href="https://github.com/jakebeep00" target="_blank" className="text-slate-500 hover:text-indigo-400 transition-all"><Github size={36} /></a>
-                  <a href="mailto:jaegeunkim.work@gmail.com" className="text-slate-500 hover:text-indigo-400 transition-all"><Mail size={36} /></a>
+                <h2 className="title-font text-3xl font-black text-white tracking-[0.3em] uppercase">Ready to Innovate</h2>
+                <div className="flex justify-center gap-12">
+                  <a href="https://github.com/jakebeep00" target="_blank" className="text-slate-600 hover:text-indigo-400 hover:scale-125 transition-all"><Github size={40} /></a>
+                  <a href="https://www.linkedin.com/in/jaegeun-kim-068551364" target="_blank" className="text-slate-600 hover:text-indigo-400 hover:scale-125 transition-all"><Linkedin size={40} /></a>
+                  <a href="mailto:jaegeunkim.work@gmail.com" className="text-slate-600 hover:text-indigo-400 hover:scale-125 transition-all"><Mail size={40} /></a>
                 </div>
-                <p className="text-slate-600 text-sm font-bold uppercase tracking-widest">© 2025 Jaegeun Kim.</p>
+                <p className="text-slate-600 text-sm font-black tracking-widest uppercase">© 2025 Jaegeun Kim. Built with React & Spline.</p>
               </footer>
             </div>
             
             <div className="fixed bottom-10 right-10 z-50">
-              <a href="mailto:jaegeunkim.work@gmail.com" className="flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-5 rounded-full shadow-2xl transition-all font-black text-lg">
-                <Mail size={24} />
-                <span>CONTACT ME</span>
+              <a href="mailto:jaegeunkim.work@gmail.com" className="flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-5 rounded-full shadow-[0_15px_35px_rgba(79,70,229,0.5)] transition-all font-black text-lg group">
+                <Mail size={24} className="group-hover:animate-bounce" />
+                <span>HIRE ME</span>
               </a>
             </div>
           </div>
